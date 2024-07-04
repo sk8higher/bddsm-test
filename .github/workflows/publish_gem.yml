@@ -10,10 +10,6 @@ jobs:
     name: Push gem to RubyGems.org
     runs-on: ubuntu-latest
 
-    permissions:
-      id-token: write
-      contents: write
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,4 +20,7 @@ jobs:
           bundler-cache: true
           ruby-version: ruby
 
-      - uses: rubygems/release-gem@v1
+      - uses: dawidd6/action-publish-gem@v1
+        with:
+          api_key: ${{secrets.RUBYGEMS_API_KEY}}
+          github_token: ${{secrets.GITHUB_TOKEN}}
